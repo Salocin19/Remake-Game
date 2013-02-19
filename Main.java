@@ -30,7 +30,7 @@ public class Main extends Applet implements Runnable
      */
     public void init()
     {
-        //gs = new MainMenuScreen();
+        gs = new MainMenuScreen();
     }
 
     /**

@@ -26,11 +26,11 @@ public class MainMenuScreen extends GameScreen
 
     void drawScreen(Graphics g)
     {
-        //g.drawString(menu.size() + "" + " hello", 25, 25);
+        g.drawString(menu.size() + "" + " hello", 25, 25);
         g.drawString("yoyoyo",25,25);
-        /*for (int i = 0; i < menu.size(); i++)
+        for (int i = 0; i < menu.size(); i++)
         {
             g.drawString(menu.get(i).text, 25, i*25 + 25);
-        }*/
+        }
     }
 }
