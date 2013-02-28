@@ -4,15 +4,48 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.applet.*;
 
-public class Main extends Applet implements Runnable
+public class GamePanel extends JPanel implements Runnable
 {
-    GameScreen gs;
+    GameScreen currentScreen;
+    GameFrame containerFrame;
+    
+    public GamePanel(GameFrame gf)
+    {
+        this.containerFrame = gf;
+        this.init();
+        this.start();
+    }
+    
+    public void switchScreens(GameScreen gs)
+    {
+        removeKeyListeners();
+        currentScreen = gs;
+        addKeyListeners(gs.getKeyListeners());
+    }
+    
+    void removeKeyListeners()
+    {
+        KeyListener[] l = containerFrame.getKeyListeners();
+        for (KeyListener k : l)
+        {
+            containerFrame.removeKeyListener(k);
+        }
+    }
+    
+    void addKeyListeners(java.util.List<KeyListener> l)
+    {
+        for (KeyListener k : l)
+        {
+            containerFrame.addKeyListener(k);
+        }
+    }
+    
     public void run()
     {
         while (true)
         {
+            currentScreen.run();
             repaint();
-            
             try
             {
                 Thread.sleep(20);
@@ -30,7 +63,8 @@ public class Main extends Applet implements Runnable
      */
     public void init()
     {
-        gs = new MainMenuScreen();
+        currentScreen = new MainMenuScreen(this);
+        containerFrame.addKeyListener(currentScreen);
     }
 
     /**
@@ -65,7 +99,8 @@ public class Main extends Applet implements Runnable
      */
     public void paint(Graphics g)
     {
-        gs.drawScreen(g);
+        super.paintComponent(g); //clear screen
+        currentScreen.drawScreen(g);
     }
 
     /**

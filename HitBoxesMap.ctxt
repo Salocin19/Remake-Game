@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ initialize()
+comment1.params=filename
+comment1.target=HitBox\ getHitBox(java.lang.String)
+comment2.params=
+comment2.target=void\ clear()
+numComments=3

@@ -1,11 +1,13 @@
-import java.awt.*;
 import java.util.*;
+import java.awt.*;
 import java.awt.event.*;
-public class MainMenuScreen extends GameScreen
+public class PauseScreen extends GameScreen
 {
     int currentMenuChoice = 0;
     
     public ArrayList<MenuChoice> menu;
+    
+    GameScreen returnScreen;
     
     public java.util.List<KeyListener> getKeyListeners()
     {
@@ -14,17 +16,17 @@ public class MainMenuScreen extends GameScreen
         return l;
     }
     
-    public MainMenuScreen(GamePanel gp)
+    public PauseScreen(GamePanel gp, LevelScreen returnScreen)
     {
         container = gp;
-        MenuChoice choice1 = new MenuChoice("start");
-        MenuChoice choice2 = new MenuChoice("options");
-        MenuChoice choice3 = new MenuChoice("quit");
+        this.returnScreen = returnScreen;
+        
+        MenuChoice choice1 = new MenuChoice("return");
+        MenuChoice choice2 = new MenuChoice("quit");
         
         menu = new ArrayList<MenuChoice>(0);
         menu.add(choice1);
         menu.add(choice2);
-        menu.add(choice3);
         
         menu.get(currentMenuChoice).selected = true;
     }
@@ -65,13 +67,14 @@ public class MainMenuScreen extends GameScreen
     void selectChoice()
     {
         String currentSelected = menu.get(currentMenuChoice).text;
-        if (currentSelected.equals("start"))
+        if (currentSelected.equals("return"))
         {
-            container.switchScreens(new LevelScreen(container));
+            container.switchScreens(returnScreen);
         }
-        else if (currentSelected.equals("options"))
+        else if (currentSelected.equals("quit"))
         {
-            container.switchScreens(new OptionsMenuScreen(container));
+            HitBoxesMap.clear();
+            container.switchScreens(new MainMenuScreen(container));
         }
     }
     

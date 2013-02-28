@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.util.List\ getKeyListeners()
+comment1.params=gp
+comment1.target=LevelScreen(GamePanel)
+comment2.params=
+comment2.target=void\ initSolids()
+comment3.params=g
+comment3.target=void\ drawScreen(java.awt.Graphics)
+comment4.params=g
+comment4.target=void\ drawSolids(java.awt.Graphics)
+comment5.params=e
+comment5.target=void\ keyTyped(java.awt.event.KeyEvent)
+comment6.params=e
+comment6.target=void\ keyReleased(java.awt.event.KeyEvent)
+comment7.params=e
+comment7.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment8.params=
+comment8.target=void\ run()
+comment9.params=
+comment9.target=void\ pause()
+numComments=10

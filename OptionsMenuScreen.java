@@ -1,7 +1,7 @@
-import java.awt.*;
 import java.util.*;
+import java.awt.*;
 import java.awt.event.*;
-public class MainMenuScreen extends GameScreen
+public class OptionsMenuScreen extends GameScreen
 {
     int currentMenuChoice = 0;
     
@@ -14,12 +14,12 @@ public class MainMenuScreen extends GameScreen
         return l;
     }
     
-    public MainMenuScreen(GamePanel gp)
+    public OptionsMenuScreen(GamePanel gp)
     {
         container = gp;
-        MenuChoice choice1 = new MenuChoice("start");
-        MenuChoice choice2 = new MenuChoice("options");
-        MenuChoice choice3 = new MenuChoice("quit");
+        MenuChoice choice1 = new MenuChoice("option 1");
+        MenuChoice choice2 = new MenuChoice("option 2");
+        MenuChoice choice3 = new MenuChoice("back");
         
         menu = new ArrayList<MenuChoice>(0);
         menu.add(choice1);
@@ -65,13 +65,9 @@ public class MainMenuScreen extends GameScreen
     void selectChoice()
     {
         String currentSelected = menu.get(currentMenuChoice).text;
-        if (currentSelected.equals("start"))
+        if (currentSelected.equals("back"))
         {
-            container.switchScreens(new LevelScreen(container));
-        }
-        else if (currentSelected.equals("options"))
-        {
-            container.switchScreens(new OptionsMenuScreen(container));
+            container.switchScreens(new MainMenuScreen(container));
         }
     }
     
