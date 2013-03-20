@@ -1,0 +1,21 @@
+Server
+
+Worker thread accepts connections
+Only one active game at a time
+every 30ms send to every player, state object
+
+starts off accepting connection -> starts game -> loop back
+
+
+
+Client
+everytime receiver receives State object, update data structs
+client should just draw, all game logic is in server
+
+
+
+-------------------------------
+THREAD COUNT
+-------------------------------
+Server (4 threads)
+Main server, server state calculator, and 2 receivers
