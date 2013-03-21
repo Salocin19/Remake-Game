@@ -6,7 +6,7 @@ import java.io.*;
 import javax.imageio.*;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-public class Player implements Collidable, KeyListener
+public class Player implements Collidable, KeyListener, Serializable
 {
 
     HitBox hitbox;
@@ -201,6 +201,18 @@ public class Player implements Collidable, KeyListener
         running = true;
         dir = LEFT;
     }
+
+    void stop_running_right()
+    {
+      if (dir == RIGHT)
+        running = false;
+    }
+
+    void stop_running_left()
+    {
+      if (dir == LEFT)
+        running = false;
+    }
     
     public void keyPressed(KeyEvent e)
     {
@@ -224,13 +236,11 @@ public class Player implements Collidable, KeyListener
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_RIGHT)
         {
-            if (dir == RIGHT)
-                running = false;
+            stop_running_right();
         }
         else if (key == KeyEvent.VK_LEFT)
         {
-            if (dir == LEFT)
-                running = false;
+            stop_running_left();
         }
     }
     

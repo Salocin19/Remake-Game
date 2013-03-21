@@ -1,6 +1,7 @@
 package Remake;
+import java.io.Serializable;
 //hitbox used for collision detection
-public class HitBox
+public class HitBox implements Serializable
 {
     public int x, y, width, height, originX, originY;
     

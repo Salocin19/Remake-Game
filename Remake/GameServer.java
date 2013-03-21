@@ -32,6 +32,7 @@ public class GameServer
 
   void initializeGameData()
   {
+    HitBoxesMap.initialize();
     threads = new LinkedList<Thread>();
     gameState = new GameState();
   }
@@ -151,11 +152,5 @@ public class GameServer
   public static void main(String[] args)
   {
     GameServer g = new GameServer();
-    Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-    while (true)
-    {
-      if (g.quit == true)
-        g = new GameServer();
-    }
   }
 }

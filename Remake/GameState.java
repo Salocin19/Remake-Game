@@ -14,11 +14,8 @@ public class GameState implements Serializable, Cloneable
 
   public GameState()
   {
-    /*
-    x1 = 0;
-    y1 = 50;
-    x2 = 100;
-    y2 = 100;*/
+    player1 = new Player();
+    player2 = new Player();
   }
 
   public String toString()

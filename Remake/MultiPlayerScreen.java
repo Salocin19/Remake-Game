@@ -10,6 +10,7 @@ public class MultiPlayerScreen extends GameScreen
 
   public MultiPlayerScreen(GamePanel gp)
   {
+    HitBoxesMap.initialize();
     this.container = gp;
     gameState = new GameState();
     drawer = new StateDrawer(this);
@@ -40,22 +41,50 @@ public class MultiPlayerScreen extends GameScreen
 
   public void keyPressed(KeyEvent e)
   {
-    if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+    int keyCode = e.getKeyCode();
+    PlayerCommand pc = null;
+
+    if (keyCode == KeyEvent.VK_RIGHT)
     {
-      PlayerCommand pc = new PlayerCommand(PlayerCommand.PRESS_RIGHT);
-      gameClient.sendCommand(pc);
+      pc = new PlayerCommand(PlayerCommand.PRESS_RIGHT);
     }
 
-    if (e.getKeyCode() == KeyEvent.VK_LEFT)
+    if (keyCode == KeyEvent.VK_LEFT)
     {
-      PlayerCommand pc = new PlayerCommand(PlayerCommand.PRESS_LEFT);
-      gameClient.sendCommand(pc);
+      pc = new PlayerCommand(PlayerCommand.PRESS_LEFT);
     }
+
+    if (keyCode == KeyEvent.VK_UP)
+    {
+      pc = new PlayerCommand(PlayerCommand.PRESS_UP);
+    }
+    
+    if (pc != null)
+      gameClient.sendCommand(pc);
 
   }
 
   public void keyReleased(KeyEvent e)
   {
+    int keyCode = e.getKeyCode();
+    PlayerCommand pc = null;
+    if (keyCode == KeyEvent.VK_RIGHT)
+    {
+      pc = new PlayerCommand(PlayerCommand.RELEASE_RIGHT);
+    }
+
+    if (keyCode == KeyEvent.VK_LEFT)
+    {
+      pc = new PlayerCommand(PlayerCommand.RELEASE_LEFT);
+    }
+
+    if (keyCode == KeyEvent.VK_UP)
+    {
+      pc = new PlayerCommand(PlayerCommand.RELEASE_UP);
+    }
+
+    if (pc != null)
+      gameClient.sendCommand(pc);
 
   }
 
