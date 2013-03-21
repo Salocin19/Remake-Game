@@ -20,7 +20,7 @@ public class GameState implements Serializable, Cloneable
 
   public String toString()
   {
-    return ""; //this is bad code, just temp
+    return player1 + " " + player2; //this is bad code, just temp
     //return x1 + " " + y1 + " " + x2 + " " + y2;
   }
 }

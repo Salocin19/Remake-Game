@@ -22,6 +22,11 @@ public class HitBox implements Serializable
         this.originX = originX;
         this.originY = originY;
     }
+
+    public HitBox clone()
+    {
+      return new HitBox(x,y,width,height,originX,originY);
+    }
     
     public boolean collidesWith(HitBox otherHB)
     {

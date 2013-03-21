@@ -33,27 +33,35 @@ public class ServerStateCalculator implements Runnable
 
   void gameLoop() throws Exception
   {
+    server.gameState.player1.run();
+    server.gameState.player2.run();
     server.sendState();
   }
 
   void executePlayerCommand(PlayerCommand pc, int playerNumber)
   {
-    /*
+    int command = pc.command;
+    Player p;
     if (playerNumber == 1)
-    {
-    if (pc.command == PlayerCommand.PRESS_RIGHT)
-      server.gameState.x1 += 1;
-    else if (pc.command == PlayerCommand.PRESS_LEFT)
-      server.gameState.x1 -= 1;
-    }
+      p = server.gameState.player1;
     else
-    {
-    if (pc.command == PlayerCommand.PRESS_RIGHT)
-      server.gameState.x2 += 1;
-    else if (pc.command == PlayerCommand.PRESS_LEFT)
-      server.gameState.x2 -= 1;
+      p = server.gameState.player2;
 
-    }*/
+
+    switch (command)
+    {
+      case PlayerCommand.PRESS_RIGHT : p.run_right();
+                                         break;
+      case PlayerCommand.PRESS_LEFT : p.run_left();
+                                        break;
+      case PlayerCommand.PRESS_UP : p.jump();
+                                      break;
+      case PlayerCommand.RELEASE_RIGHT : p.stop_running_right();
+                                          break;
+      case PlayerCommand.RELEASE_LEFT : p.stop_running_left();
+    }
+
+
   }
 
 

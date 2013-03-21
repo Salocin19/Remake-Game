@@ -32,9 +32,20 @@ public class GameServer
 
   void initializeGameData()
   {
+    GameFrame.initializeGameConstants();
     HitBoxesMap.initialize();
+    addSolidsToMap();
     threads = new LinkedList<Thread>();
     gameState = new GameState();
+  }
+
+  void addSolidsToMap()
+  {
+    Solid floor = new Box(0, GameConstants.GAME_HEIGHT - 100, GameConstants.GAME_WIDTH, 10);
+    Solid box = new Box(200, GameConstants.GAME_HEIGHT - 250, GameConstants.GAME_WIDTH, 10);
+
+    GameConstants.solidMap.addSolid(floor);
+    GameConstants.solidMap.addSolid(box);
   }
 
   void initializeConnections()

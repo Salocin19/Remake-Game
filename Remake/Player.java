@@ -28,12 +28,13 @@ public class Player implements Collidable, KeyListener, Serializable
     
     public Player ()
     {
-        hitbox = HitBoxesMap.getHitBox("Salocin");
+        hitbox = HitBoxesMap.getHitBox("Salocin").clone();//must clone! otherwise, all players with with same sprite will refer to same hitbox (this causes commands from one player to affect all players with same sprite)
     }
 
     public Player clone()
     {
       Player p = new Player();
+      p.hitbox = this.hitbox.clone();
       p.gravity = this.gravity;
       p.y_speed = this.y_speed;
       p.x_speed = this.x_speed;
@@ -247,5 +248,10 @@ public class Player implements Collidable, KeyListener, Serializable
     void pause()
     {
         running = false;
+    }
+
+    public String toString()
+    {
+      return hitbox.x + "," + hitbox.y;
     }
 }

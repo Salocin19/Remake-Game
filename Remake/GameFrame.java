@@ -16,7 +16,7 @@ public class GameFrame extends JFrame {
         setResizable(false);
     }
 
-    private void initializeGameConstants()
+    static void initializeGameConstants()
     {
         GameConstants.GAME_HEIGHT = 500;
         GameConstants.GAME_WIDTH = 500;
