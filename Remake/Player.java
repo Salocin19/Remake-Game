@@ -16,9 +16,8 @@ public class Player implements Collidable, KeyListener
     int jump_speed = 20;
     int dir; //1 = right, -1 = left
     int run_speed = 5;
+    int max_y_speed = 10;
     
-    
-    final int max_y_speed = 10;
     final int LEFT = -1;
     final int RIGHT = 1;
     
@@ -33,14 +32,7 @@ public class Player implements Collidable, KeyListener
 
     public Player clone()
     {
-      Player p = new Player();
-      p.gravity = this.gravity;
-      p.y_speed = this.y_speed;
-      p.x_speed = this.x_speed;
-      p.jump_speed = this.jump_speed;
-      p.dir = this.dir;
-      p.run_speed = this.run_speed;
-      return p;
+      return this;
     }
 
     public void draw(Graphics g)
