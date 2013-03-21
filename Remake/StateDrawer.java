@@ -18,7 +18,7 @@ public class StateDrawer
   void drawPlayers(Graphics g)
   {
     GameState gameState = mp.gameState;
-    g.drawString("Player 1", gameState.x1, gameState.y1);
-    g.drawString("Player 2", gameState.x2, gameState.y2);
+    //g.drawString("Player 1", gameState.x1, gameState.y1);
+    //g.drawString("Player 2", gameState.x2, gameState.y2);
   }
 }

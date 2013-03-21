@@ -10,7 +10,6 @@ public class Player implements Collidable, KeyListener
 {
     SolidMap solidMap;
 
-    BufferedImage sprite;
     HitBox hitbox;
     int gravity = 1;
     int y_speed = 0;
@@ -27,24 +26,20 @@ public class Player implements Collidable, KeyListener
     boolean airborne = true;
     boolean running = false;
     
-    public Player (String fileName, SolidMap sm)
+    public Player (SolidMap sm)
     {
-        File spriteFile = new File(fileName);
-        hitbox = HitBoxesMap.getHitBox(spriteFile.getName());
+        hitbox = HitBoxesMap.getHitBox("Salocin");
         solidMap = sm;
-        try
-        {
-            sprite = ImageIO.read(spriteFile);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+    }
+
+    public Player clone()
+    {
+      return this;
     }
 
     public void draw(Graphics g)
     {
-        g.drawImage(sprite, hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
+        g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
     

@@ -38,6 +38,7 @@ public class ServerStateCalculator implements Runnable
 
   void executePlayerCommand(PlayerCommand pc, int playerNumber)
   {
+    /*
     if (playerNumber == 1)
     {
     if (pc.command == PlayerCommand.PRESS_RIGHT)
@@ -52,7 +53,7 @@ public class ServerStateCalculator implements Runnable
     else if (pc.command == PlayerCommand.PRESS_LEFT)
       server.gameState.x2 -= 1;
 
-    }
+    }*/
   }
 
 

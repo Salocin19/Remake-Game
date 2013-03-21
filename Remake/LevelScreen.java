@@ -28,7 +28,7 @@ public class LevelScreen extends GameScreen
         gameHeight = gp.getHeight();
         gameWidth = gp.getWidth();
         initSolids();
-        p = new Player("Sprites/Salocin.png", solidMap);
+        p = new Player(solidMap);
     }
     
     void initSolids()
