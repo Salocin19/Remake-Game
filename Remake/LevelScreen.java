@@ -5,8 +5,6 @@ import java.awt.event.*;
 import java.util.*;
 public class LevelScreen extends GameScreen
 {
-    SolidMap solidMap;
-
     int gameHeight;
     int gameWidth;
     Player p;
@@ -25,10 +23,10 @@ public class LevelScreen extends GameScreen
         HitBoxesMap.initialize();
         
         this.container = gp;
-        gameHeight = gp.getHeight();
-        gameWidth = gp.getWidth();
+        gameHeight = GameConstants.GAME_HEIGHT;
+        gameWidth = GameConstants.GAME_WIDTH;
         initSolids();
-        p = new Player(solidMap);
+        p = new Player();
     }
     
     void initSolids()
@@ -36,9 +34,8 @@ public class LevelScreen extends GameScreen
         Solid floor = new Box(0, gameHeight - 100, gameWidth, 10);
         Solid box = new Box(200, gameHeight - 250, gameWidth, 10);
         
-        solidMap = new SolidMap(gameWidth, gameHeight);
-        solidMap.addSolid(floor);   
-        solidMap.addSolid(box);
+        GameConstants.solidMap.addSolid(floor);   
+        GameConstants.solidMap.addSolid(box);
         
         solids = new ArrayList<Solid>(0);
         solids.add(floor);

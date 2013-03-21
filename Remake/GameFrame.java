@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 public class GameFrame extends JFrame {
 
     public GameFrame() {
+        initializeGameConstants();
         add(new GamePanel(this));
         setTitle("REMAKE-GAME");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -14,6 +15,14 @@ public class GameFrame extends JFrame {
         setVisible(true);
         setResizable(false);
     }
+
+    private void initializeGameConstants()
+    {
+        GameConstants.GAME_HEIGHT = 500;
+        GameConstants.GAME_WIDTH = 500;
+        GameConstants.solidMap = new SolidMap(500,500);
+    }
+
     public static void main(String[] args) {
         new GameFrame();
     }

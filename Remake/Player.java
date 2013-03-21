@@ -8,7 +8,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 public class Player implements Collidable, KeyListener
 {
-    SolidMap solidMap;
 
     HitBox hitbox;
     int gravity = 1;
@@ -26,10 +25,9 @@ public class Player implements Collidable, KeyListener
     boolean airborne = true;
     boolean running = false;
     
-    public Player (SolidMap sm)
+    public Player ()
     {
         hitbox = HitBoxesMap.getHitBox("Salocin");
-        solidMap = sm;
     }
 
     public Player clone()
@@ -171,7 +169,7 @@ public class Player implements Collidable, KeyListener
     boolean isFree(int x, int y)
     {
         HitBox hb = new HitBox(x,y,hitbox.width, hitbox.height);
-        return !solidMap.hasSolid(hb);
+        return !GameConstants.solidMap.hasSolid(hb);
     }
     
     void jump()
