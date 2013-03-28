@@ -7,6 +7,7 @@ public class MultiPlayerScreen extends GameScreen
   GameClient gameClient;
   GameState gameState;
   StateDrawer drawer;
+  ArrayList<Solid> solids;
 
   public MultiPlayerScreen(GamePanel gp)
   {
@@ -14,6 +15,18 @@ public class MultiPlayerScreen extends GameScreen
     this.container = gp;
     gameState = new GameState();
     drawer = new StateDrawer(this);
+    initSolids();
+  }
+
+  void initSolids()
+  {
+    int gameHeight = GameConstants.GAME_HEIGHT;
+    int gameWidth = GameConstants.GAME_WIDTH;
+    Solid floor = new Box(0, gameHeight - 100, gameWidth, 10);
+    Solid box = new Box(200,gameHeight - 250, gameWidth, 10);
+    solids = new ArrayList<Solid>(0);
+    solids.add(floor);
+    solids.add(box);
   }
 
   public void initializeConnections()
@@ -24,7 +37,16 @@ public class MultiPlayerScreen extends GameScreen
 
   public void drawScreen(Graphics g)
   {
+    drawSolids(g);
     drawer.draw(g);
+  }
+
+  void drawSolids(Graphics g)
+  {
+    for (Solid s : solids)
+    {
+      s.draw(g);
+    }
   }
 
   public void run()
