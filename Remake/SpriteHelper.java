@@ -9,11 +9,12 @@ public class SpriteHelper
   Sprite coolstand;
 
   static int coolstand_num = 34;
+  static int salostand_num = 14;
 
   public SpriteHelper()
   {
-    salostand = createSpriteFromImage("Sprites/Salocin.png");
-    coolstand = createSpriteFromImages("coolstand");
+    salostand = createSpriteFromImages("Salostand", salostand_num);
+    coolstand = createSpriteFromImages("Coolstand", coolstand_num);
   }
 
   private Sprite createSpriteFromImage(String fileName)
@@ -33,13 +34,13 @@ public class SpriteHelper
     return new Sprite(bimage);
   }
 
-  private Sprite createSpriteFromImages(String spritename)
+  private Sprite createSpriteFromImages(String spritename, int numImages)
   {
+    String folder = "Sprites/" + spritename + "/";
     try
     {
-      String folder = "Sprites/" + spritename + "/";
-      BufferedImage[] images = new BufferedImage[SpriteHelper.coolstand_num];
-      for (int i = 0; i < SpriteHelper.coolstand_num; i++)
+      BufferedImage[] images = new BufferedImage[numImages];
+      for (int i = 0; i < numImages; i++)
       {
         String filename = folder + "img" + i + ".png";
         images[i] = ImageIO.read(new File(filename));
@@ -48,6 +49,7 @@ public class SpriteHelper
     }
     catch(Exception e)
     {
+      System.out.println("Could not read location - " + folder);
       e.printStackTrace();
       System.exit(0);
     }
@@ -56,7 +58,7 @@ public class SpriteHelper
 
   public BufferedImage getCurrentImage(Player p)
   {
-    return coolstand.getCurrentImage();
+    return salostand.getCurrentImage();
   }
   
 }

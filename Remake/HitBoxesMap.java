@@ -10,7 +10,8 @@ public class HitBoxesMap
     public static void initialize()
     {
         hitBoxesMap = new HashMap<String,HitBox>();
-        hitBoxesMap.put("Salocin", new HitBox(0,0,19,48,29,79));
+        hitBoxesMap.put("Salocin", new HitBox(0,0,27,48,26,79));
+        hitBoxesMap.put("Coolfool", new HitBox(0,0,24,49,10,27));
     }
     
     public static HitBox getHitBox(String filename)
