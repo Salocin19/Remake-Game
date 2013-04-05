@@ -6,15 +6,19 @@ import java.io.*;
 public class SpriteHelper
 {
   Sprite salostand;
+  Sprite salorun;
+
   Sprite coolstand;
 
   static int coolstand_num = 34;
   static int salostand_num = 14;
+  static int salorun_num = 8;
 
   public SpriteHelper()
   {
     salostand = createSpriteFromImages("Salostand", salostand_num);
     coolstand = createSpriteFromImages("Coolstand", coolstand_num);
+    salorun = createSpriteFromImages("Salorun", salorun_num);
   }
 
   private Sprite createSpriteFromImage(String fileName)
@@ -58,7 +62,10 @@ public class SpriteHelper
 
   public BufferedImage getCurrentImage(Player p)
   {
-    return salostand.getCurrentImage();
+    if (p.currentSpriteName.equals("Salostand"))
+      return salostand.getCurrentImage();
+    else
+      return salorun.getCurrentImage();
   }
   
 }

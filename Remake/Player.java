@@ -16,6 +16,8 @@ public class Player implements Collidable, KeyListener, Serializable
     int jump_speed = 20;
     int dir; //1 = right, -1 = left
     int run_speed = 5;
+
+    String currentSpriteName = "Salostand";
     
     
     final int max_y_speed = 10;
@@ -28,7 +30,7 @@ public class Player implements Collidable, KeyListener, Serializable
     
     public Player ()
     {
-        hitbox = HitBoxesMap.getHitBox("Salocin").clone();//must clone! otherwise, all players with with same sprite will refer to same hitbox (this causes commands from one player to affect all players with same sprite)
+        hitbox = HitBoxesMap.getHitBox("Salostand").clone();//must clone! otherwise, all players with with same sprite will refer to same hitbox (this causes commands from one player to affect all players with same sprite)
     }
 
     public Player clone()
@@ -48,6 +50,7 @@ public class Player implements Collidable, KeyListener, Serializable
     {
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        g.drawString(currentSpriteName.equals("Salorun") + "", hitbox.x, hitbox.y-20);
     }
     
     public HitBox getHitBox()
@@ -82,8 +85,30 @@ public class Player implements Collidable, KeyListener, Serializable
     //modifies all internal variables except hitbox.x, hitbox.y
     void update_state()
     {
+        updateHitBoxAndSprites();
         updateXSpeed();
         updateYSpeed();
+    }
+
+    void updateHitBoxAndSprites()
+    {
+        if (!airborne && running)
+          currentSpriteName = "Salorun";
+        else
+          currentSpriteName = "Salostand";
+
+        updateHitBox();
+    }
+
+    void updateHitBox()
+    {
+        int x = hitbox.x;
+        int y = hitbox.y;
+        int height = hitbox.height;
+        hitbox = HitBoxesMap.getHitBox(currentSpriteName);
+        hitbox.x = x;
+        hitbox.y = y + height - hitbox.height; //gets rid of height disparity in hit boxes, may need to do this with width as well
+        
     }
     
     void checkSolidCollisions()
