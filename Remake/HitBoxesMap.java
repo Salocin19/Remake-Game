@@ -23,7 +23,7 @@ public class HitBoxesMap
     
     public static HitBox getHitBox(String filename)
     {
-        return HitBoxesMap.hitBoxesMap.get(filename);
+        return HitBoxesMap.hitBoxesMap.get(filename).clone();
     }
     
     public static void clear()

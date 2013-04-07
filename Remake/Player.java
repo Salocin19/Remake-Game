@@ -10,6 +10,7 @@ public class Player implements Collidable, KeyListener, Serializable
 {
 
     HitBox hitbox;
+    java.util.List<Projectile> projectiles;
     int gravity = 1;
     int y_speed = 0;
     int x_speed = 0;
@@ -31,6 +32,7 @@ public class Player implements Collidable, KeyListener, Serializable
     public Player ()
     {
         hitbox = HitBoxesMap.getHitBox("Salostand").clone();//must clone! otherwise, all players with with same sprite will refer to same hitbox (this causes commands from one player to affect all players with same sprite)
+        projectiles = new LinkedList<Projectile>();
     }
 
     public Player clone()
@@ -51,6 +53,12 @@ public class Player implements Collidable, KeyListener, Serializable
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
         g.drawString(currentSpriteName.equals("Salorun") + "", hitbox.x, hitbox.y-20);
+
+
+        for (Projectile p : projectiles)
+        {
+          p.draw(g);
+        }
     }
     
     public HitBox getHitBox()
@@ -76,10 +84,19 @@ public class Player implements Collidable, KeyListener, Serializable
     
     public void run()
     {
+        runProjectiles();
         update_state();
         update_y_position();
         update_x_position();
         checkSolidCollisions();
+    }
+
+    void runProjectiles()
+    {
+        for (Projectile p : projectiles)
+        {
+          p.run();
+        }
     }
     
     //modifies all internal variables except hitbox.x, hitbox.y
@@ -218,6 +235,13 @@ public class Player implements Collidable, KeyListener, Serializable
             y_speed = -jump_speed;
         }
     }
+
+    void createProjectile()
+    {
+        HitBox hb = HitBoxesMap.getHitBox("Darkball");
+        hb.x = 50; hb.y = 50;
+        projectiles.add(new Projectile(hb, "Darkball"));
+    }
     
     void run_right()
     {
@@ -258,6 +282,7 @@ public class Player implements Collidable, KeyListener, Serializable
         else if (key == KeyEvent.VK_UP)
         {
             jump();
+            createProjectile();
         }
     }
     public void keyTyped(KeyEvent e){};

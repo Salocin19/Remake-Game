@@ -34,6 +34,7 @@ public class SpriteHelper
     sprites.put("Salofall", salofall);
 
     Sprite darkball = createSpriteFromImages("Darkball", darkball_num);
+    sprites.put("Darkball", darkball);
 
     Sprite coolstand = createSpriteFromImages("Coolstand", coolstand_num);
 
@@ -91,6 +92,13 @@ public class SpriteHelper
     return image;
   }
 
+  public BufferedImage getCurrentImage(String spriteName)
+  {
+    BufferedImage image;
+    image = sprites.get(spriteName).getCurrentImage();
+    return image;
+  }
+
   BufferedImage reverseImage(BufferedImage i)
   {
     AffineTransform tx = AffineTransform.getScaleInstance(-1,1);
@@ -99,5 +107,12 @@ public class SpriteHelper
     i = op.filter(i,null);
     return i;
   }
+
+  public void drawProjectile(Graphics g, Projectile p)
+  {
+    BufferedImage image = getCurrentImage(p.spriteName);
+    HitBox hitbox = p.hitbox;
+    g.drawImage(image, hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
+  } 
   
 }
