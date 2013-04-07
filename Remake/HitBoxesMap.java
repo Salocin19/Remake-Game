@@ -14,6 +14,7 @@ public class HitBoxesMap
         hitBoxesMap.put("Salorun", new HitBox(0,0,27,44,12,30));
         hitBoxesMap.put("Salojump", new HitBox(0,0,23,50,7,28));
         hitBoxesMap.put("Salofall", new HitBox(0,0,23,50,7,28));
+        hitBoxesMap.put("Darkball", new HitBox(0,0,12,11,8,10));
 
 
 

@@ -8,17 +8,14 @@ import java.util.*;
 public class SpriteHelper
 {
   HashMap<String, Sprite> sprites;
-  Sprite salostand;
-  Sprite salorun;
-  Sprite salojump;
-  Sprite salofall;
 
-  Sprite coolstand;
 
   static int salostand_num = 14;
   static int salorun_num = 8;
   static int salojump_num = 1;
   static int salofall_num = 1;
+
+  static int darkball_num = 10;
 
   static int coolstand_num = 34;
 
@@ -26,17 +23,19 @@ public class SpriteHelper
   {
     sprites = new HashMap<String, Sprite>();
 
-    salostand = createSpriteFromImages("Salostand", salostand_num);
-    salorun = createSpriteFromImages("Salorun", salorun_num);
-    salojump = createSpriteFromImages("Salojump", salojump_num);
-    salofall = createSpriteFromImages("Salofall", salofall_num);
+    Sprite salostand = createSpriteFromImages("Salostand", salostand_num);
+    Sprite salorun = createSpriteFromImages("Salorun", salorun_num);
+    Sprite salojump = createSpriteFromImages("Salojump", salojump_num);
+    Sprite salofall = createSpriteFromImages("Salofall", salofall_num);
 
     sprites.put("Salostand", salostand);
     sprites.put("Salorun", salorun);
     sprites.put("Salojump", salojump);
     sprites.put("Salofall", salofall);
 
-    coolstand = createSpriteFromImages("Coolstand", coolstand_num);
+    Sprite darkball = createSpriteFromImages("Darkball", darkball_num);
+
+    Sprite coolstand = createSpriteFromImages("Coolstand", coolstand_num);
 
     sprites.put("Coolstand", coolstand);
   }
