@@ -80,6 +80,11 @@ public class SpriteHelper
     return null;
   }
 
+  public Sprite getSprite(String name)
+  {
+    return sprites.get(name).clone();
+  }
+
   public BufferedImage getCurrentImage(Player p)
   {
     BufferedImage image;

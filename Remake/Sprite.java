@@ -12,6 +12,11 @@ public class Sprite
     images[0] = image;
   }
 
+  public Sprite clone()
+  {
+    return new Sprite(images);
+  }
+
   public Sprite(BufferedImage[] i)
   {
     images = i;

@@ -45,6 +45,11 @@ public class Player implements Collidable, KeyListener, Serializable
       p.jump_speed = this.jump_speed;
       p.dir = this.dir;
       p.run_speed = this.run_speed;
+
+      p.currentSpriteName = currentSpriteName;
+
+      p.airborne = airborne;
+      p.running = running;
       return p;
     }
 
