@@ -4,22 +4,41 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
 import java.awt.geom.*;
+import java.util.*;
 public class SpriteHelper
 {
+  HashMap<String, Sprite> sprites;
   Sprite salostand;
   Sprite salorun;
+  Sprite salojump;
+  Sprite salofall;
 
   Sprite coolstand;
 
-  static int coolstand_num = 34;
   static int salostand_num = 14;
   static int salorun_num = 8;
+  static int salojump_num = 1;
+  static int salofall_num = 1;
+
+  static int coolstand_num = 34;
 
   public SpriteHelper()
   {
+    sprites = new HashMap<String, Sprite>();
+
     salostand = createSpriteFromImages("Salostand", salostand_num);
-    coolstand = createSpriteFromImages("Coolstand", coolstand_num);
     salorun = createSpriteFromImages("Salorun", salorun_num);
+    salojump = createSpriteFromImages("Salojump", salojump_num);
+    salofall = createSpriteFromImages("Salofall", salofall_num);
+
+    sprites.put("Salostand", salostand);
+    sprites.put("Salorun", salorun);
+    sprites.put("Salojump", salojump);
+    sprites.put("Salofall", salofall);
+
+    coolstand = createSpriteFromImages("Coolstand", coolstand_num);
+
+    sprites.put("Coolstand", coolstand);
   }
 
   private Sprite createSpriteFromImage(String fileName)
@@ -64,10 +83,7 @@ public class SpriteHelper
   public BufferedImage getCurrentImage(Player p)
   {
     BufferedImage image;
-    if (p.currentSpriteName.equals("Salostand"))
-      image = salostand.getCurrentImage();
-    else
-      image = salorun.getCurrentImage();
+    image = sprites.get(p.currentSpriteName).getCurrentImage();
 
 
     if (p.dir == Player.LEFT)

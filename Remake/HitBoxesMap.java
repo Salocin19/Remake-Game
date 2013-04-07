@@ -12,6 +12,8 @@ public class HitBoxesMap
         hitBoxesMap = new HashMap<String,HitBox>();
         hitBoxesMap.put("Salostand", new HitBox(0,0,27,48,26,79));
         hitBoxesMap.put("Salorun", new HitBox(0,0,27,44,12,30));
+        hitBoxesMap.put("Salojump", new HitBox(0,0,23,50,7,28));
+        hitBoxesMap.put("Salofall", new HitBox(0,0,23,50,7,28));
 
 
 

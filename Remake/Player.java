@@ -92,10 +92,14 @@ public class Player implements Collidable, KeyListener, Serializable
 
     void updateHitBoxAndSprites()
     {
-        if (!airborne && running)
-          currentSpriteName = "Salorun";
-        else
+        if (!airborne && !running)
           currentSpriteName = "Salostand";
+        else if (!airborne && running)
+          currentSpriteName = "Salorun";
+        else if (airborne && y_speed < 0)
+          currentSpriteName = "Salojump";
+        else if (airborne && y_speed > 0)
+          currentSpriteName = "Salofall";
 
         updateHitBox();
     }
