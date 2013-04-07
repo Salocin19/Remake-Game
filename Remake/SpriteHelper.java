@@ -88,7 +88,7 @@ public class SpriteHelper
   public BufferedImage getCurrentImage(Player p)
   {
     BufferedImage image;
-    image = sprites.get(p.currentSpriteName).getCurrentImage();
+    image = sprites.get(p.currentSpriteName).getImage(p.subImageIndex);
 
 
     if (p.dir == Player.LEFT)

@@ -17,6 +17,7 @@ public class Player implements Collidable, KeyListener, Serializable
     int jump_speed = 20;
     int dir; //1 = right, -1 = left
     int run_speed = 5;
+    int subImageIndex = 0;
 
     String currentSpriteName = "Salostand";
     
@@ -47,6 +48,7 @@ public class Player implements Collidable, KeyListener, Serializable
       p.run_speed = this.run_speed;
 
       p.currentSpriteName = currentSpriteName;
+      p.subImageIndex = subImageIndex;
 
       p.airborne = airborne;
       p.running = running;
@@ -57,7 +59,7 @@ public class Player implements Collidable, KeyListener, Serializable
     {
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-        g.drawString(currentSpriteName.equals("Salorun") + "", hitbox.x, hitbox.y-20);
+        g.drawString(subImageIndex + "", hitbox.x, hitbox.y-20);
 
 
         for (Projectile p : projectiles)
@@ -114,16 +116,26 @@ public class Player implements Collidable, KeyListener, Serializable
 
     void updateHitBoxAndSprites()
     {
+        subImageIndex++;
         if (!airborne && !running)
-          currentSpriteName = "Salostand";
+          changeSpriteName("Salostand");
         else if (!airborne && running)
-          currentSpriteName = "Salorun";
+          changeSpriteName("Salorun");
         else if (airborne && y_speed < 0)
-          currentSpriteName = "Salojump";
+          changeSpriteName("Salojump");
         else if (airborne && y_speed > 0)
-          currentSpriteName = "Salofall";
+          changeSpriteName("Salofall");
 
         updateHitBox();
+    }
+
+    void changeSpriteName(String name)
+    {
+      if (!name.equals(currentSpriteName))
+      {
+        currentSpriteName = name;
+        subImageIndex = 0;
+      }
     }
 
     void updateHitBox()

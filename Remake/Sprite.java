@@ -30,4 +30,9 @@ public class Sprite
       current = 0;
     return i;
   }
+
+  public BufferedImage getImage(int index)
+  {
+    return images[index % images.length];
+  }
 }
