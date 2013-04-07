@@ -21,8 +21,8 @@ public class Player implements Collidable, KeyListener, Serializable
     
     
     final int max_y_speed = 10;
-    final int LEFT = -1;
-    final int RIGHT = 1;
+    static final int LEFT = -1;
+    static final int RIGHT = 1;
     
     
     boolean airborne = true;

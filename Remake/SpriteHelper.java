@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
+import java.awt.geom.*;
 public class SpriteHelper
 {
   Sprite salostand;
@@ -62,10 +63,26 @@ public class SpriteHelper
 
   public BufferedImage getCurrentImage(Player p)
   {
+    BufferedImage image;
     if (p.currentSpriteName.equals("Salostand"))
-      return salostand.getCurrentImage();
+      image = salostand.getCurrentImage();
     else
-      return salorun.getCurrentImage();
+      image = salorun.getCurrentImage();
+
+
+    if (p.dir == Player.LEFT)
+      image = reverseImage(image);
+
+    return image;
+  }
+
+  BufferedImage reverseImage(BufferedImage i)
+  {
+    AffineTransform tx = AffineTransform.getScaleInstance(-1,1);
+    tx.translate(-i.getWidth(null), 0);
+    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+    i = op.filter(i,null);
+    return i;
   }
   
 }
