@@ -4,6 +4,9 @@ import java.util.*;
 import java.net.*;
 public class GameServer
 {
+  public static final int STATE_SEND_COUNT = 3;
+
+  public int sendCounter;
   public boolean quit = false;
   public GameState gameState;
   public ServerStateCalculator ssc;
@@ -11,6 +14,7 @@ public class GameServer
   Socket player1_socket, player2_socket;
   ObjectOutputStream player1_outputStream, player2_outputStream;
   LinkedList<Thread> threads;
+  LinkedList<GameState> sendStates;
 
   public GameServer()
   {
@@ -32,11 +36,13 @@ public class GameServer
 
   void initializeGameData()
   {
+    sendCounter = 1;
     GameFrame.initializeGameConstants();
     HitBoxesMap.initialize();
     addSolidsToMap();
     threads = new LinkedList<Thread>();
     gameState = new GameState();
+    sendStates = new LinkedList<GameState>();
   }
 
   void addSolidsToMap()
@@ -135,13 +141,25 @@ public class GameServer
     }
   }
 
+  void manageCommunications()
+  {
+    sendStates.add((GameState) this.gameState.clone());
+    sendCounter++;
+    if (sendCounter >= STATE_SEND_COUNT)
+    {
+      sendState();
+      sendStates = new LinkedList<GameState>();
+      sendCounter = 1;
+    }
+  }
+
   void sendState()
   {
     try
     {
       //System.out.println("Sending " + gameState);
-      player1_outputStream.writeObject(gameState.clone());
-      player2_outputStream.writeObject(gameState.clone());
+      player1_outputStream.writeObject(sendStates);
+      player2_outputStream.writeObject(sendStates);
 
       player1_outputStream.flush();
       player2_outputStream.flush();

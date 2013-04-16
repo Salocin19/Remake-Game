@@ -8,6 +8,7 @@ public class MultiPlayerScreen extends GameScreen
   GameState gameState;
   StateDrawer drawer;
   ArrayList<Solid> solids;
+  LinkedList<GameState> receivedStates;
 
   public MultiPlayerScreen(GamePanel gp)
   {
@@ -15,6 +16,7 @@ public class MultiPlayerScreen extends GameScreen
     this.container = gp;
     gameState = new GameState();
     drawer = new StateDrawer(this);
+    receivedStates = new LinkedList<GameState>();
     initSolids();
   }
 
@@ -51,7 +53,8 @@ public class MultiPlayerScreen extends GameScreen
 
   public void run()
   {
-    return;
+    if (receivedStates.size() != 0)
+      gameState = receivedStates.poll();
   }
 
   public List<KeyListener> getKeyListeners()

@@ -1,5 +1,6 @@
 package Remake;
 import java.lang.Thread;
+import java.util.*;
 import java.io.*;
 public class ClientStateReceiver implements Runnable
 {
@@ -18,9 +19,10 @@ public class ClientStateReceiver implements Runnable
     {
       try
       {
-        GameState s = (GameState)in.readObject();
+        Object o = in.readObject();
+        LinkedList<GameState> s = (LinkedList<GameState>) o;
         //System.out.println("Received state with " + s); 
-        gameScreen.gameState = s;
+        gameScreen.receivedStates = s;
       }
       catch(Exception e)
       {

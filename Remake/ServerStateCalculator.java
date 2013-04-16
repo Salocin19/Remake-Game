@@ -35,7 +35,7 @@ public class ServerStateCalculator implements Runnable
   {
     server.gameState.player1.run();
     server.gameState.player2.run();
-    server.sendState();
+    server.manageCommunications();
   }
 
   void executePlayerCommand(PlayerCommand pc, int playerNumber)
