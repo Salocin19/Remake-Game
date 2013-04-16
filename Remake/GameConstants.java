@@ -4,6 +4,8 @@ public class GameConstants
 
   static int GAME_HEIGHT, GAME_WIDTH;
 
+  static int GAME_SPEED = 60;
+
   static SolidMap solidMap;
 
   static SpriteHelper spriteHelper = new SpriteHelper();

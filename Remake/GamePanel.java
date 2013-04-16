@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable
             repaint();
             try
             {
-                Thread.sleep(20);
+                Thread.sleep(GameConstants.GAME_SPEED);
             }
             catch (InterruptedException e)
             {

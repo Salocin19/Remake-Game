@@ -17,7 +17,7 @@ public class ServerStateCalculator implements Runnable
         gameLoop();
         if (server.quit)
           return;
-        Thread.sleep(30);
+        Thread.sleep(GameConstants.GAME_SPEED);
       }
       catch(InterruptedException e)
       {
