@@ -16,6 +16,21 @@ public class GameServer
   LinkedList<Thread> threads;
   LinkedList<GameState> sendStates;
 
+  void closeSockets()
+  {
+    try
+    {
+      ss.close();
+      player1_socket.close();
+      player2_socket.close();
+    }
+    catch(Exception e)
+    {
+      System.out.println("Error closing sockets.");
+      System.exit(0);
+    }
+  }
+
   public GameServer()
   {
     System.out.println("Starting up game server...");
@@ -173,9 +188,12 @@ public class GameServer
 
   void quitApplication(Exception e)
   {
+
     quit = true;
-    e.printStackTrace();
-    System.exit(0);
+    //e.printStackTrace();
+    //System.exit(0);
+
+    
   }
 
   public static void main(String[] args)
