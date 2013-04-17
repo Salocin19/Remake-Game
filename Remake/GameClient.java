@@ -45,6 +45,7 @@ public class GameClient implements Runnable
       oos = new ObjectOutputStream(s.getOutputStream());
       ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
       ClientStateReceiver csr = new ClientStateReceiver(ois, gameScreen);
+      oos.writeObject(gameScreen.playerName);
       new Thread(csr).start();
     }
     catch(Exception e)

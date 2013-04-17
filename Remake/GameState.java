@@ -3,6 +3,7 @@ import java.io.*;
 public class GameState implements Serializable, Cloneable
 {
   public Player player1, player2;
+  public String player1Name, player2Name;
 
   protected Object clone()
   {

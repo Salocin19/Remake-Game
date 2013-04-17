@@ -9,9 +9,11 @@ public class MultiPlayerScreen extends GameScreen
   StateDrawer drawer;
   ArrayList<Solid> solids;
   LinkedList<GameState> receivedStates;
+  String playerName;
 
-  public MultiPlayerScreen(GamePanel gp)
+  public MultiPlayerScreen(GamePanel gp, String playerName)
   {
+    this.playerName = playerName;
     HitBoxesMap.initialize();
     this.container = gp;
     gameState = new GameState();

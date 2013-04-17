@@ -72,9 +72,10 @@ public class MainMenuScreen extends GameScreen
         }
         else if (currentSelected.equals("multiplayer"))
         {
-            MultiPlayerScreen mp = new MultiPlayerScreen(container);
-            container.switchScreens(mp);
-            mp.initializeConnections();
+            //MultiPlayerScreen mp = new MultiPlayerScreen(container);
+            EnterNameScreen ens = new EnterNameScreen();
+            container.switchScreens(ens);
+            //mp.initializeConnections();
         }
         else if (currentSelected.equals("options"))
         {
