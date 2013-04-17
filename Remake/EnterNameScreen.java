@@ -8,6 +8,11 @@ public class EnterNameScreen extends GameScreen
 {
   public String screenName = "";
 
+  public EnterNameScreen(GamePanel gp)
+  {
+    container = gp;
+  }
+
   void drawScreen(Graphics g)
   {
     g.drawString("Enter your screen name:",50,50);
@@ -44,7 +49,9 @@ public class EnterNameScreen extends GameScreen
       screenName += (char) key;
     else if (key == KeyEvent.VK_ENTER)
     {
-            container.switchScreens(new MultiPlayerScreen(container, screenName));
+            MultiPlayerScreen mp = new MultiPlayerScreen(container, screenName);
+            container.switchScreens(mp);
+            mp.initializeConnections();
     }
   }
 

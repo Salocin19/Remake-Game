@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 public class Player implements Collidable, KeyListener, Serializable
 {
 
+    public String screenName = "";
+
     HitBox hitbox;
     java.util.List<Projectile> projectiles;
     int gravity = 1;
@@ -39,6 +41,7 @@ public class Player implements Collidable, KeyListener, Serializable
     public Player clone()
     {
       Player p = new Player();
+      p.screenName = screenName;
       p.hitbox = this.hitbox.clone();
       p.gravity = this.gravity;
       p.y_speed = this.y_speed;
@@ -59,7 +62,7 @@ public class Player implements Collidable, KeyListener, Serializable
     {
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-        g.drawString(subImageIndex + "", hitbox.x, hitbox.y-20);
+        g.drawString(screenName, hitbox.x, hitbox.y-20);
 
 
         for (Projectile p : projectiles)

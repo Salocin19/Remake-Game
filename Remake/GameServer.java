@@ -109,7 +109,7 @@ public class GameServer
       player1_outputStream = new ObjectOutputStream(player1_socket.getOutputStream());
 
       //get player1 screenName
-      gameState.player1Name = (String) ois.readObject();
+      gameState.player1.screenName = (String) ois.readObject();
 
 
       Thread t = new Thread(player1_receiver);
@@ -135,7 +135,7 @@ public class GameServer
       player2_outputStream = new ObjectOutputStream(player2_socket.getOutputStream());
 
       //get player2 name
-      gameState.player2Name = (String) ois2.readObject();
+      gameState.player2.screenName = (String) ois2.readObject();
 
       Thread t = new Thread(player2_receiver);
       threads.add(t);
