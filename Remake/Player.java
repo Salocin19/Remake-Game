@@ -259,8 +259,8 @@ public class Player implements Collidable, KeyListener, Serializable
     void createProjectile()
     {
         HitBox hb = HitBoxesMap.getHitBox("Darkball");
-        hb.x = 50; hb.y = 50;
-        projectiles.add(new Projectile(hb, "Darkball"));
+        hb.x = this.hitbox.x; hb.y = this.hitbox.y;
+        projectiles.add(new Projectile(hb, "Darkball", dir));
     }
     
     void run_right()

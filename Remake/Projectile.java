@@ -5,11 +5,13 @@ public class Projectile implements Collidable
   static final int speed = 5;
   HitBox hitbox;
   String spriteName;
+  int direction;
 
-  public Projectile(HitBox hb, String s)
+  public Projectile(HitBox hb, String s, int direction)
   {
     hitbox = hb;
     spriteName = s;
+    this.direction = direction;
   }
 
   public HitBox getHitBox()
@@ -41,7 +43,7 @@ public class Projectile implements Collidable
 
   public void run()
   {
-    hitbox.x += 5;
+    hitbox.x += 5 * direction;
 
   }
 
