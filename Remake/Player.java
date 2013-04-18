@@ -12,7 +12,7 @@ public class Player implements Collidable, KeyListener, Serializable
     public String screenName = "";
 
     HitBox hitbox;
-    java.util.List<Projectile> projectiles;
+    java.util.Set<Projectile> projectiles;
     int gravity = 1;
     int y_speed = 0;
     int x_speed = 0;
@@ -35,7 +35,7 @@ public class Player implements Collidable, KeyListener, Serializable
     public Player ()
     {
         hitbox = HitBoxesMap.getHitBox("Salostand").clone();//must clone! otherwise, all players with with same sprite will refer to same hitbox (this causes commands from one player to affect all players with same sprite)
-        projectiles = new LinkedList<Projectile>();
+        projectiles = Collections.synchronizedSet(new HashSet<Projectile>());
     }
 
     public Player clone()
@@ -101,11 +101,19 @@ public class Player implements Collidable, KeyListener, Serializable
         checkSolidCollisions();
     }
 
-    void runProjectiles()
+    synchronized void runProjectiles()
     {
+        java.util.List<Projectile> remove = new LinkedList<Projectile>();
         for (Projectile p : projectiles)
         {
+          if (p.time >= 50)
+            remove.add(p);
           p.run();
+        }
+
+        for (Projectile p : remove)
+        {
+          projectiles.remove(p);
         }
     }
     

@@ -6,6 +6,7 @@ public class Projectile implements Collidable
   HitBox hitbox;
   String spriteName;
   int direction;
+  public int time = 0;
 
   public Projectile(HitBox hb, String s, int direction)
   {
@@ -43,6 +44,7 @@ public class Projectile implements Collidable
 
   public void run()
   {
+    time ++;
     hitbox.x += 5 * direction;
 
   }
