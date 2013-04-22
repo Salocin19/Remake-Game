@@ -1,6 +1,7 @@
 package Remake;
+import java.io.Serializable;
 import java.awt.*;
-public class Projectile implements Collidable
+public class Projectile implements Collidable, Serializable
 {
   static final int speed = 5;
   HitBox hitbox;
@@ -13,6 +14,12 @@ public class Projectile implements Collidable
     hitbox = hb;
     spriteName = s;
     this.direction = direction;
+  }
+
+  public Projectile clone()
+  {
+    Projectile p = new Projectile(hitbox.clone(), spriteName, direction);
+    return p;
   }
 
   public HitBox getHitBox()

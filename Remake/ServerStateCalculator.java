@@ -35,6 +35,7 @@ public class ServerStateCalculator implements Runnable
   {
     server.gameState.player1.run();
     server.gameState.player2.run();
+    System.out.println(server.gameState.player1.projectiles.size());
     server.manageCommunications();
   }
 
@@ -54,7 +55,7 @@ public class ServerStateCalculator implements Runnable
                                          break;
       case PlayerCommand.PRESS_LEFT : p.run_left();
                                         break;
-      case PlayerCommand.PRESS_UP : p.jump();
+      case PlayerCommand.PRESS_UP : {p.jump();p.createProjectile();}
                                       break;
       case PlayerCommand.RELEASE_RIGHT : p.stop_running_right();
                                           break;

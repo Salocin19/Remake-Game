@@ -41,6 +41,13 @@ public class Player implements Collidable, KeyListener, Serializable
     public Player clone()
     {
       Player p = new Player();
+      //clone projectiles
+      for (Projectile proj : projectiles)
+      {
+        p.projectiles.add(proj.clone());
+      }
+
+
       p.screenName = screenName;
       p.hitbox = this.hitbox.clone();
       p.gravity = this.gravity;
@@ -63,6 +70,7 @@ public class Player implements Collidable, KeyListener, Serializable
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
         g.drawString(screenName, hitbox.x, hitbox.y-20);
+        g.drawString("" + projectiles.size(), hitbox.x, hitbox.y-30);
 
 
         for (Projectile p : projectiles)
