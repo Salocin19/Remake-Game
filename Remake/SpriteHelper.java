@@ -14,6 +14,7 @@ public class SpriteHelper
   static int salorun_num = 8;
   static int salojump_num = 1;
   static int salofall_num = 1;
+  static int saloshot_num = 1;
 
   static int darkball_num = 10;
 
@@ -27,11 +28,13 @@ public class SpriteHelper
     Sprite salorun = createSpriteFromImages("Salorun", salorun_num);
     Sprite salojump = createSpriteFromImages("Salojump", salojump_num);
     Sprite salofall = createSpriteFromImages("Salofall", salofall_num);
+    Sprite saloshot = createSpriteFromImages("Saloshot", saloshot_num);
 
     sprites.put("Salostand", salostand);
     sprites.put("Salorun", salorun);
     sprites.put("Salojump", salojump);
     sprites.put("Salofall", salofall);
+    sprites.put("Saloshot", saloshot);
 
     Sprite darkball = createSpriteFromImages("Darkball", darkball_num);
     sprites.put("Darkball", darkball);

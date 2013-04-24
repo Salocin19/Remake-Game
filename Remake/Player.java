@@ -21,6 +21,7 @@ public class Player implements Collidable, KeyListener, Serializable
     int dir; //1 = right, -1 = left
     int run_speed = 5;
     int subImageIndex = 0;
+    int shoot_counter = 0;
 
     String currentSpriteName = "Salostand";
     
@@ -28,10 +29,12 @@ public class Player implements Collidable, KeyListener, Serializable
     final int max_y_speed = 10;
     static final int LEFT = -1;
     static final int RIGHT = 1;
+    static final int SHOOT_DURATION = 5;
     
     
     boolean airborne = true;
     boolean running = false;
+    boolean shooting = false;
     
     public Player ()
     {
@@ -58,6 +61,7 @@ public class Player implements Collidable, KeyListener, Serializable
       p.jump_speed = this.jump_speed;
       p.dir = this.dir;
       p.run_speed = this.run_speed;
+      p.shoot_counter = p.shoot_counter;
 
       p.currentSpriteName = currentSpriteName;
       p.subImageIndex = subImageIndex;
@@ -134,14 +138,27 @@ public class Player implements Collidable, KeyListener, Serializable
     void update_state()
     {
         updateHitBoxAndSprites();
+        updateAttacks();
         updateXSpeed();
         updateYSpeed();
+    }
+
+    void updateAttacks()
+    {
+      if (shooting)
+      {
+        shoot_counter--;
+        if (shoot_counter <= 0)
+          shooting = false;
+      }
     }
 
     void updateHitBoxAndSprites()
     {
         subImageIndex++;
-        if (!airborne && !running)
+        if (shooting && !airborne && !running)
+          changeSpriteName("Saloshot");
+        else if (!airborne && !running && !shooting)
           changeSpriteName("Salostand");
         else if (!airborne && running)
           changeSpriteName("Salorun");
@@ -270,32 +287,54 @@ public class Player implements Collidable, KeyListener, Serializable
     
     void jump()
     {
-        if (!airborne)
+        if (!airborne && !shooting)
         {
             airborne = true;
             y_speed = -jump_speed;
         }
+    }
+    
+    void shoot()
+    {
+      if (!airborne && !shooting)
+      {
+        createProjectile();
+        shooting = true;
+        running = false;
+        x_speed = 0;
+        shoot_counter = SHOOT_DURATION;
+      }
     }
 
     void createProjectile()
     {
         health -= 5;
         HitBox hb = HitBoxesMap.getHitBox("Darkball");
-        hb.x = this.hitbox.x; hb.y = this.hitbox.y;
+        if (dir == 1) 
+          hb.x = this.hitbox.x + 20; 
+        else
+          hb.x = this.hitbox.x - 6; 
+        hb.y = this.hitbox.y + 10;
         projectiles.add(new Projectile(hb, "Darkball", dir));
     }
     
     void run_right()
     {
+      if (!shooting)
+      {
         running = true;
         dir = RIGHT;
+      }
         
     }
     
     void run_left()
     {
+      if (!shooting)
+      {
         running = true;
         dir = LEFT;
+      }
     }
 
     void stop_running_right()
@@ -324,7 +363,10 @@ public class Player implements Collidable, KeyListener, Serializable
         else if (key == KeyEvent.VK_UP)
         {
             jump();
-            createProjectile();
+        }
+        else if (key == KeyEvent.VK_Z)
+        {
+            shoot();
         }
     }
     public void keyTyped(KeyEvent e){};

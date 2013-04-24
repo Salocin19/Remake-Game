@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.awt.*;
 public class Projectile implements Collidable, Serializable
 {
-  static final int speed = 5;
+  static final int speed = 10;
   HitBox hitbox;
   String spriteName;
   int direction;
@@ -52,7 +52,7 @@ public class Projectile implements Collidable, Serializable
   public void run()
   {
     time ++;
-    hitbox.x += 5 * direction;
+    hitbox.x += speed * direction;
 
   }
 
