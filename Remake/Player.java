@@ -13,6 +13,7 @@ public class Player implements Collidable, KeyListener, Serializable
 
     HitBox hitbox;
     java.util.Set<Projectile> projectiles;
+    int health = 100;
     int gravity = 1;
     int y_speed = 0;
     int x_speed = 0;
@@ -48,6 +49,7 @@ public class Player implements Collidable, KeyListener, Serializable
       }
 
 
+      p.health = health;
       p.screenName = screenName;
       p.hitbox = this.hitbox.clone();
       p.gravity = this.gravity;
@@ -70,7 +72,10 @@ public class Player implements Collidable, KeyListener, Serializable
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
         g.drawString(screenName, hitbox.x, hitbox.y-20);
-        g.drawString("" + projectiles.size(), hitbox.x, hitbox.y-30);
+
+        g.setColor(Color.green);
+        g.fillRect(hitbox.x, hitbox.y-30, health * hitbox.width / 100, 5);
+        g.setColor(Color.black);
 
 
         for (Projectile p : projectiles)
@@ -274,6 +279,7 @@ public class Player implements Collidable, KeyListener, Serializable
 
     void createProjectile()
     {
+        health -= 5;
         HitBox hb = HitBoxesMap.getHitBox("Darkball");
         hb.x = this.hitbox.x; hb.y = this.hitbox.y;
         projectiles.add(new Projectile(hb, "Darkball", dir));
