@@ -10,6 +10,8 @@ public class PlayerCommand implements Serializable
   public static final int RELEASE_LEFT = 102;
   public static final int RELEASE_UP = 103;
 
+  public static final int SHOOT = 1001;
+
   public int command;
 
   public PlayerCommand (int command)

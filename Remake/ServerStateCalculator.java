@@ -6,6 +6,8 @@ public class ServerStateCalculator implements Runnable
   public ServerStateCalculator(GameServer server)
   {
     this.server = server;
+    server.gameState.player1.otherPlayer = server.gameState.player2;
+    server.gameState.player2.otherPlayer = server.gameState.player1;
   }
 
   public void run()
@@ -55,11 +57,14 @@ public class ServerStateCalculator implements Runnable
                                          break;
       case PlayerCommand.PRESS_LEFT : p.run_left();
                                         break;
-      case PlayerCommand.PRESS_UP : {p.jump();p.createProjectile();}
+      case PlayerCommand.PRESS_UP : {p.jump();}
                                       break;
       case PlayerCommand.RELEASE_RIGHT : p.stop_running_right();
                                           break;
       case PlayerCommand.RELEASE_LEFT : p.stop_running_left();
+                                        break;
+      case PlayerCommand.SHOOT : p.shoot();
+                                  break;
     }
 
 

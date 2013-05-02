@@ -24,6 +24,7 @@ public class Player implements Collidable, KeyListener, Serializable
     int shoot_counter = 0;
 
     String currentSpriteName = "Salostand";
+    Player otherPlayer = null;
     
     
     final int max_y_speed = 10;
@@ -125,6 +126,11 @@ public class Player implements Collidable, KeyListener, Serializable
         {
           if (p.time >= 50)
             remove.add(p);
+          else if(gameIsMultiPlayer() && p.hasCollision(otherPlayer))
+          {
+            otherPlayer.loseHealth();
+            remove.add(p);
+          }
           p.run();
         }
 
@@ -132,6 +138,11 @@ public class Player implements Collidable, KeyListener, Serializable
         {
           projectiles.remove(p);
         }
+    }
+
+    boolean gameIsMultiPlayer()
+    {
+      return otherPlayer != null;
     }
     
     //modifies all internal variables except hitbox.x, hitbox.y
@@ -308,7 +319,6 @@ public class Player implements Collidable, KeyListener, Serializable
 
     void createProjectile()
     {
-        health -= 5;
         HitBox hb = HitBoxesMap.getHitBox("Darkball");
         if (dir == 1) 
           hb.x = this.hitbox.x + 20; 
@@ -316,6 +326,12 @@ public class Player implements Collidable, KeyListener, Serializable
           hb.x = this.hitbox.x - 6; 
         hb.y = this.hitbox.y + 10;
         projectiles.add(new Projectile(hb, "Darkball", dir));
+    }
+
+    void loseHealth()
+    {
+        health -= 5;
+
     }
     
     void run_right()

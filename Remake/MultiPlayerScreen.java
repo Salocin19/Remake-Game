@@ -85,6 +85,11 @@ public class MultiPlayerScreen extends GameScreen
     {
       pc = new PlayerCommand(PlayerCommand.PRESS_UP);
     }
+
+    if (keyCode == KeyEvent.VK_Z)
+    {
+      pc = new PlayerCommand(PlayerCommand.SHOOT);
+    }
     
     if (pc != null)
       gameClient.sendCommand(pc);
