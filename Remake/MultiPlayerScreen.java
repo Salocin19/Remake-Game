@@ -1,5 +1,6 @@
 package Remake;
 import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.event.*;
 import java.util.*;
 public class MultiPlayerScreen extends GameScreen
@@ -10,13 +11,15 @@ public class MultiPlayerScreen extends GameScreen
   ArrayList<Solid> solids;
   LinkedList<GameState> receivedStates;
   String playerName;
+  int gameTime;
 
   public MultiPlayerScreen(GamePanel gp, String playerName)
   {
     this.playerName = playerName;
     HitBoxesMap.initialize();
     this.container = gp;
-    gameState = new GameState();
+    gameState = null;
+    gameTime = 0;
     drawer = new StateDrawer(this);
     receivedStates = new LinkedList<GameState>();
     initSolids();
@@ -41,8 +44,22 @@ public class MultiPlayerScreen extends GameScreen
 
   public void drawScreen(Graphics g)
   {
-    drawSolids(g);
-    drawer.draw(g);
+    if (gameState != null)
+    {
+      gameTime++;
+      if (gameTime <= 50)
+      {
+        g.setColor(Color.red);
+        g.drawString("START!", 200, 200);
+        g.setColor(Color.black);
+      }
+      drawSolids(g);
+      drawer.draw(g);
+    }
+    else //waiting on other player
+    {
+      g.drawString("Waiting on other player...", 200, 200);
+    }
   }
 
   void drawSolids(Graphics g)

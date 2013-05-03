@@ -76,7 +76,7 @@ public class Player implements Collidable, KeyListener, Serializable
     {
         g.drawImage(GameConstants.spriteHelper.getCurrentImage(this), hitbox.x - hitbox.originX, hitbox.y - hitbox.originY, null);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-        g.drawString(screenName, hitbox.x, hitbox.y-20);
+        g.drawString(screenName, hitbox.x, hitbox.y-10);
 
         g.setColor(Color.green);
         g.fillRect(hitbox.x, hitbox.y-30, health * hitbox.width / 100, 5);
