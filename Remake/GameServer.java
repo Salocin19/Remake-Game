@@ -4,7 +4,7 @@ import java.util.*;
 import java.net.*;
 public class GameServer
 {
-  public static final int STATE_SEND_COUNT = 4;
+  public static final int STATE_SEND_COUNT = GameConstants.STATE_SEND_COUNT;
 
   public int sendCounter;
   public boolean quit = false;
