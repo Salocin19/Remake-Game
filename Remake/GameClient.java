@@ -26,7 +26,7 @@ public class GameClient implements Runnable
     try
     {
       statusMessage = "Connecting to server...";
-      s = new Socket("localhost", 7979);
+      s = new Socket("70.112.204.135", 7979);
       startClient();
     }
     catch(Exception e)
