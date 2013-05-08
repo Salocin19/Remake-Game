@@ -31,9 +31,13 @@ public class MultiPlayerScreen extends GameScreen
     int gameWidth = GameConstants.GAME_WIDTH;
     Solid floor = new Box(0, gameHeight - 100, gameWidth, 10);
     Solid box = new Box(200,gameHeight - 250, gameWidth, 10);
+    Solid leftWall = new Box(0,0,3, gameHeight);
+    Solid rightWall = new Box(gameWidth - 3, 0, 3, gameHeight);
     solids = new ArrayList<Solid>(0);
     solids.add(floor);
     solids.add(box);
+    solids.add(leftWall);
+    solids.add(rightWall);
   }
 
   public void initializeConnections()

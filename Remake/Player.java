@@ -40,6 +40,7 @@ public class Player implements Collidable, KeyListener, Serializable
     public Player ()
     {
         hitbox = HitBoxesMap.getHitBox("Salostand").clone();//must clone! otherwise, all players with with same sprite will refer to same hitbox (this causes commands from one player to affect all players with same sprite)
+        hitbox.x = 10;//don't want to start in a wall
         projectiles = Collections.synchronizedSet(new HashSet<Projectile>());
     }
 

@@ -33,13 +33,19 @@ public class LevelScreen extends GameScreen
     {
         Solid floor = new Box(0, gameHeight - 100, gameWidth, 10);
         Solid box = new Box(200, gameHeight - 250, gameWidth, 10);
+        Solid leftWall = new Box(0,0,3, gameHeight);
+        Solid rightWall = new Box(gameWidth - 3, 0, 3, gameHeight);
         
         GameConstants.solidMap.addSolid(floor);   
         GameConstants.solidMap.addSolid(box);
+        GameConstants.solidMap.addSolid(rightWall);
+        GameConstants.solidMap.addSolid(leftWall);
         
         solids = new ArrayList<Solid>(0);
         solids.add(floor);
         solids.add(box);
+        solids.add(leftWall);
+        solids.add(rightWall);
     }
 
     public void drawScreen(Graphics g)
