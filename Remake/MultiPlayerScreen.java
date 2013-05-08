@@ -7,11 +7,13 @@ public class MultiPlayerScreen extends GameScreen
 {
   GameClient gameClient;
   GameState gameState;
+  ChatBox chatBox;
   StateDrawer drawer;
   ArrayList<Solid> solids;
   LinkedList<GameState> receivedStates;
   String playerName;
   int gameTime;
+  boolean chatting = false;
 
   public MultiPlayerScreen(GamePanel gp, String playerName)
   {
@@ -22,7 +24,14 @@ public class MultiPlayerScreen extends GameScreen
     gameTime = 0;
     drawer = new StateDrawer(this);
     receivedStates = new LinkedList<GameState>();
+    chatBox = new ChatBox(GameConstants.GAME_WIDTH, 0);
     initSolids();
+    addChatBox();
+  }
+
+  void addChatBox()
+  {
+    container.containerFrame.setSize(700,500);
   }
 
   void initSolids()
@@ -30,7 +39,7 @@ public class MultiPlayerScreen extends GameScreen
     int gameHeight = GameConstants.GAME_HEIGHT;
     int gameWidth = GameConstants.GAME_WIDTH;
     Solid floor = new Box(0, gameHeight - 100, gameWidth, 10);
-    Solid box = new Box(200,gameHeight - 250, gameWidth, 10);
+    Solid box = new Box(200,gameHeight - 250, gameWidth - 200, 10);
     Solid leftWall = new Box(0,0,3, gameHeight);
     Solid rightWall = new Box(gameWidth - 3, 0, 3, gameHeight);
     solids = new ArrayList<Solid>(0);
@@ -57,8 +66,11 @@ public class MultiPlayerScreen extends GameScreen
         g.drawString("START!", 200, 200);
         g.setColor(Color.black);
       }
+      if (chatting)
+        g.drawString("You are typing...press ENTER to get back in the game!", 200, 200);
       drawSolids(g);
       drawer.draw(g);
+      chatBox.draw(g);
     }
     else //waiting on other player
     {
@@ -89,6 +101,14 @@ public class MultiPlayerScreen extends GameScreen
 
   public void keyPressed(KeyEvent e)
   {
+    if (!chatting)
+      actionPressed(e);
+    else
+      typingPressed(e);
+  } 
+
+  public void actionPressed(KeyEvent e)
+  {
     int keyCode = e.getKeyCode();
     PlayerCommand pc = null;
 
@@ -111,13 +131,39 @@ public class MultiPlayerScreen extends GameScreen
     {
       pc = new PlayerCommand(PlayerCommand.SHOOT);
     }
+
+    if (keyCode == KeyEvent.VK_ENTER)
+      chatting = true;
     
     if (pc != null)
       gameClient.sendCommand(pc);
 
   }
 
+  public void typingPressed(KeyEvent e)
+  {
+    int key = e.getKeyCode();
+
+    if (key == KeyEvent.VK_BACK_SPACE)
+    {
+      chatBox.backSpace();
+    }
+    else if ((char) key >= '0' && (char) key <= 'z')
+      chatBox.addToCurrent((char) key);
+    else if (key == KeyEvent.VK_ENTER)
+    {
+      chatting = false;
+      chatBox.flush();
+    }
+  }
+
   public void keyReleased(KeyEvent e)
+  {
+    if (!chatting)
+      actionReleased(e);
+  }
+
+  public void actionReleased(KeyEvent e)
   {
     int keyCode = e.getKeyCode();
     PlayerCommand pc = null;

@@ -63,10 +63,14 @@ public class GameServer
   void addSolidsToMap()
   {
     Solid floor = new Box(0, GameConstants.GAME_HEIGHT - 100, GameConstants.GAME_WIDTH, 10);
-    Solid box = new Box(200, GameConstants.GAME_HEIGHT - 250, GameConstants.GAME_WIDTH, 10);
+    Solid box = new Box(200, GameConstants.GAME_HEIGHT - 250, GameConstants.GAME_WIDTH-200, 10);
+    Solid leftWall = new Box(0,0,3,GameConstants.GAME_HEIGHT);
+    Solid rightWall = new Box(GameConstants.GAME_WIDTH - 3, 0, 3, GameConstants.GAME_HEIGHT);
 
     GameConstants.solidMap.addSolid(floor);
     GameConstants.solidMap.addSolid(box);
+    GameConstants.solidMap.addSolid(leftWall);
+    GameConstants.solidMap.addSolid(rightWall);
   }
 
   void initializeConnections()

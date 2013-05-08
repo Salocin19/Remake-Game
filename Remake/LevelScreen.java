@@ -32,7 +32,7 @@ public class LevelScreen extends GameScreen
     void initSolids()
     {
         Solid floor = new Box(0, gameHeight - 100, gameWidth, 10);
-        Solid box = new Box(200, gameHeight - 250, gameWidth, 10);
+        Solid box = new Box(200, gameHeight - 250, gameWidth-200, 10);
         Solid leftWall = new Box(0,0,3, gameHeight);
         Solid rightWall = new Box(gameWidth - 3, 0, 3, gameHeight);
         
