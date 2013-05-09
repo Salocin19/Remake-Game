@@ -12,10 +12,19 @@ public class PlayerCommand implements Serializable
 
   public static final int SHOOT = 1001;
 
+  public static final int MESSAGE = 99;
+
   public int command;
+  public String message = "";
 
   public PlayerCommand (int command)
   {
     this.command = command;
+  }
+
+  public PlayerCommand (int command, String message)
+  {
+    this.command = command;
+    this.message = message;
   }
 }

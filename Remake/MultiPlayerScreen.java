@@ -24,7 +24,7 @@ public class MultiPlayerScreen extends GameScreen
     gameTime = 0;
     drawer = new StateDrawer(this);
     receivedStates = new LinkedList<GameState>();
-    chatBox = new ChatBox(GameConstants.GAME_WIDTH, 0);
+    chatBox = new ChatBox(GameConstants.GAME_WIDTH, 0, this);
     initSolids();
     addChatBox();
   }
@@ -147,6 +147,10 @@ public class MultiPlayerScreen extends GameScreen
     if (key == KeyEvent.VK_BACK_SPACE)
     {
       chatBox.backSpace();
+    }
+    else if (key == KeyEvent.VK_SPACE)
+    {
+      chatBox.addToCurrent(" ");
     }
     else if ((char) key >= '0' && (char) key <= 'z')
       chatBox.addToCurrent((char) key);

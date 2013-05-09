@@ -70,6 +70,12 @@ public class GameClient implements Runnable
     }
   }
 
+  public void sendMessage(String currentMessage)
+  {
+    PlayerCommand pc = new PlayerCommand(PlayerCommand.MESSAGE, currentMessage);
+    new BackgroundSender(oos, pc);
+  }
+
   public String getStatus()
   {
     return statusMessage;

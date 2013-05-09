@@ -24,7 +24,17 @@ public class CommandReceiver implements Runnable
       {
         //System.out.println("Reading...");
         PlayerCommand pc = (PlayerCommand) ois.readObject();
-        server.ssc.executePlayerCommand(pc, playerNumber);
+        if (pc.command == PlayerCommand.MESSAGE)
+        {
+          String message = pc.message;
+          if (playerNumber == 1)
+            message = server.gameState.player1.screenName + ": " + message;
+          else
+            message = server.gameState.player2.screenName + ": " + message;
+          server.sendMessageInBackground(message);
+        }
+        else
+          server.ssc.executePlayerCommand(pc, playerNumber);
       }
       catch(Exception e)
       {

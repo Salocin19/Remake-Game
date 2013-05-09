@@ -196,6 +196,14 @@ public class GameServer
     }
   }
 
+  void sendMessageInBackground(String message)
+  {
+    //System.out.println("Sending: " + message);
+    new BackgroundSender(player1_outputStream, message);
+    new BackgroundSender(player2_outputStream, message);
+
+  }
+
   void quitApplication(Exception e)
   {
 

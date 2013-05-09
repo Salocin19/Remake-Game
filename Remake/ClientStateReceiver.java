@@ -20,9 +20,14 @@ public class ClientStateReceiver implements Runnable
       try
       {
         Object o = in.readObject();
-        LinkedList<GameState> s = (LinkedList<GameState>) o;
-        //System.out.println("Received state with " + s); 
-        gameScreen.receivedStates = s;
+        if (o instanceof String)
+          gameScreen.chatBox.addToChatHistory((String) o);
+        else
+        {
+          LinkedList<GameState> s = (LinkedList<GameState>) o;
+          //System.out.println("Received state with " + s); 
+          gameScreen.receivedStates = s;
+        }
       }
       catch(Exception e)
       {
